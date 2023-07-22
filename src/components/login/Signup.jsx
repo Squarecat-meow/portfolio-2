@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Input, Form, Checkbox, Button } from "antd";
+import { Input, Form, Button } from "antd";
 import { motion } from "framer-motion";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";

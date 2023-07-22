@@ -16,7 +16,7 @@ const SearchComp = () => {
     if (searchEngine === "") {
       setSearchEngine("Google");
     }
-  });
+  }, [searchEngine]);
 
   const handleOptionChange = (value) => {
     setSearchEngine(value);

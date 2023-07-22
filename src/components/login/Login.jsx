@@ -22,7 +22,6 @@ const Login = () => {
         const user = {
           uid: userCredential.user.uid,
           email: userCredential.user.email,
-          isLogin: true,
         };
         dispatch(upLogin(user));
         navigate("/mainpage");

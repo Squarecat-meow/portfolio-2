@@ -14,7 +14,11 @@ const LoginComp = () => {
   const location = useLocation();
   return (
     <div className="flex">
-      <img src={BackgroundImg} className="object-cover w-screen h-screen" />
+      <img
+        src={BackgroundImg}
+        className="object-cover w-screen h-screen"
+        alt="Background "
+      />
       <div className="absolute flex items-center justify-center w-screen h-screen">
         <AnimatePresence mode="wait">
           <Routes key={location.pathname} location={location}>
