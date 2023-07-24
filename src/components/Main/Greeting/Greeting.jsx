@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { ref, get, child } from "firebase/database";
+import { database } from "../../../config/firebase";
+import { useSelector } from "react-redux";
 
 const Greeting = () => {
+  const uid = useSelector((state) => state.login.uid);
+  const [userInfo, setUserInfo] = useState({});
+
   const date = new Date();
   const hours = date.getHours();
   let greet;
@@ -12,6 +19,11 @@ const Greeting = () => {
   } else if (hours >= 18 && hours < 24) {
     greet = "Good evening.";
   }
+
+  const dbref = ref(database);
+  get(child(dbref, `users/${uid}`)).then((snapshot) => {
+    setUserInfo(snapshot.val());
+  });
 
   return (
     <div>
