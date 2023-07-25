@@ -10,13 +10,14 @@ import { auth, storage, database } from "../../config/firebase";
 
 import AvatarUpload from "./AvatarUpload";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SignupCompleted from "./SignupCompleted";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const imageUrl = useSelector((state) => state.signup.img);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -30,6 +31,7 @@ const Signup = () => {
         const uid = user.uid;
         handleUserDB(uid);
         setIsCompleted(true);
+        dispatch(SignupCompleted());
         setTimeout(() => {
           navigate("/");
         }, 2000);

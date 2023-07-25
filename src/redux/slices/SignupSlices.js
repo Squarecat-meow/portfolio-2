@@ -11,9 +11,12 @@ const SignupSlices = createSlice({
     imgUrl(state, action) {
       state.img = action.payload;
     },
+    signUpCompleted() {
+      return initialState;
+    },
   },
 });
 
-export const { imgUrl } = SignupSlices.actions;
+export const { imgUrl, signUpCompleted } = SignupSlices.actions;
 
 export default SignupSlices.reducer;

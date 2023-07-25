@@ -5,7 +5,7 @@ import { CloseOutlined } from "@ant-design/icons";
 
 import { motion } from "framer-motion";
 
-import UserSetting from "./UserSetting";
+import UserSetting from "./UserSetting/UserSetting";
 import EnvSetting from "./EnvSetting";
 
 const SettingModal = ({ setShowModal }) => {
