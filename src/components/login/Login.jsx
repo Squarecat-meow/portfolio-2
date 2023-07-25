@@ -1,30 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Input, Form, Checkbox, Button } from "antd";
 import { motion } from "framer-motion";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../config/firebase";
+import { auth, database } from "../../config/firebase";
 
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { upLogin } from "../../redux/slices/LoginSlices";
+import { get, ref } from "firebase/database";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [dbUser, setDbUser] = useState();
 
   const handleSubmit = (e) => {
     const userEmail = e.username;
     const userPW = e.password;
+
     signInWithEmailAndPassword(auth, userEmail, userPW)
       .then((userCredential) => {
-        const user = {
-          uid: userCredential.user.uid,
-          email: userCredential.user.email,
-        };
-        dispatch(upLogin(user));
-        navigate("/mainpage");
+        const uid = userCredential.user.uid;
+        const email = userCredential.user.email;
+
+        get(ref(database, `users/${uid}`)).then((snapshot) => {
+          const fetchData = snapshot.val();
+          const user = {
+            uid: uid,
+            email: email,
+            username: fetchData.username,
+            avatarUrl: fetchData.avatarUrl,
+          };
+          dispatch(upLogin(user));
+          navigate("/mainpage");
+        });
       })
       .catch((error) => {
         console.log(error.code);

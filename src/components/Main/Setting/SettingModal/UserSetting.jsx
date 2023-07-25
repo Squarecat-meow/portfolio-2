@@ -1,16 +1,19 @@
 import { Button, Popconfirm } from "antd";
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { upLogout } from "../../../../redux/slices/LoginSlices";
 import { useNavigate } from "react-router-dom";
 
 import { deleteUser } from "firebase/auth";
-import { auth } from "../../../../config/firebase";
+import { auth, database, storage } from "../../../../config/firebase";
+import { ref as dbref, remove, set } from "firebase/database";
+import { deleteObject, ref } from "firebase/storage";
 
 const UserSetting = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const uid = useSelector((state) => state.login.uid);
 
   const handleLogout = () => {
     dispatch(upLogout());
@@ -19,6 +22,8 @@ const UserSetting = () => {
 
   const handleSignout = () => {
     const user = auth.currentUser;
+    remove(dbref(database, `users/${uid}`));
+    deleteObject(ref(storage, `users/${uid}`));
     deleteUser(user)
       .then(() => {
         navigate("/");

@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   uid: "",
   email: "",
+  avatarUrl: "",
+  username: "",
   isLogin: false,
 };
 
@@ -14,15 +16,13 @@ const LoginSlices = createSlice({
       return {
         uid: action.payload.uid,
         email: action.payload.email,
+        avatarUrl: action.payload.avatarUrl,
+        username: action.payload.username,
         isLogin: true,
       };
     },
     upLogout(state, action) {
-      return {
-        uid: "",
-        email: "",
-        isLogin: false,
-      };
+      return initialState;
     },
   },
 });

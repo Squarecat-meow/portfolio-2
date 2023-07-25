@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Input, Form, Button } from "antd";
-import { AnimatePresence, motion, useAnimationControls } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
@@ -43,22 +43,24 @@ const Signup = () => {
         console.log(errorMessage);
       });
 
-    const avatarPromise = new Promise((resolve, reject) => {
-      const storageRef = ref(storage, "users/avatar-" + username);
-      uploadString(storageRef, imageUrl, "data_url").then((snapshot) => {
-        getDownloadURL(snapshot.ref).then((url) => {
-          resolve(url);
+    const avatarPromise = (uid) => {
+      return new Promise((resolve) => {
+        const storageRef = ref(storage, "users/" + uid);
+        uploadString(storageRef, imageUrl, "data_url").then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((url) => {
+            resolve(url);
+          });
         });
       });
-    });
+    };
 
     const handleUserDB = async (uid) => {
       const userRef = dbref(database, `users/${uid}`);
-      await avatarPromise.then((avatarUrl) => {
-        console.log(avatarUrl);
+      await avatarPromise(uid).then((avatarUrl) => {
         set(userRef, {
           username: username,
           avatarUrl: avatarUrl,
+          userEmail: userEmail,
         });
       });
     };
