@@ -2,11 +2,11 @@ import { Button, Popconfirm } from "antd";
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { upLogout } from "../../../../../redux/slices/LoginSlices";
+import { upLogout } from "../../../../redux/slices/LoginSlices";
 import { useNavigate } from "react-router-dom";
 
 import { deleteUser } from "firebase/auth";
-import { auth, database, storage } from "../../../../../config/firebase";
+import { auth, database, storage } from "../../../../config/firebase";
 import { ref as dbref, remove, set } from "firebase/database";
 import { deleteObject, ref } from "firebase/storage";
 import UserInfo from "./UserInfo";

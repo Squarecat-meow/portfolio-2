@@ -1,27 +1,12 @@
 import React from "react";
 
-import { Tabs } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 
 import { motion } from "framer-motion";
 
-import UserSetting from "./UserSetting/UserSetting";
 import EnvSetting from "./EnvSetting";
 
 const SettingModal = ({ setShowModal }) => {
-  const tabItems = [
-    {
-      key: 1,
-      label: "User Setting",
-      children: <UserSetting />,
-    },
-    {
-      key: 2,
-      label: "Environment Setting",
-      children: <EnvSetting />,
-    },
-  ];
-
   const handleClose = () => {
     setShowModal(false);
   };
@@ -35,9 +20,7 @@ const SettingModal = ({ setShowModal }) => {
       <div className="flex flex-row-reverse">
         <CloseOutlined onClick={handleClose} className="m-3" />
       </div>
-      <div className="flex">
-        <Tabs tabPosition="left" items={tabItems} />
-      </div>
+      <EnvSetting />
     </motion.div>
   );
 };
