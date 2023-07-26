@@ -17,7 +17,7 @@ const Login = () => {
   const [dbUser, setDbUser] = useState();
 
   const handleSubmit = (e) => {
-    const userEmail = e.username;
+    const userEmail = e.userEmail;
     const userPW = e.password;
 
     signInWithEmailAndPassword(auth, userEmail, userPW)
@@ -53,11 +53,11 @@ const Login = () => {
       <h1 className="my-10 text-3xl font-extrabold text-center">Log in</h1>
       <Form initialValues={{ remember: true }} onFinish={handleSubmit}>
         <Form.Item
-          name="username"
+          name="userEmail"
           rules={[{ required: true, message: "Please enter your Email!" }]}
           className="flex justify-center"
         >
-          <Input placeholder="Username" className="w-80" />
+          <Input placeholder="Email" className="w-80" />
         </Form.Item>
         <Form.Item
           name="password"
