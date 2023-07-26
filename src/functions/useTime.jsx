@@ -1,27 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const getCurrentTime = () => {
-  const [getTime, setGetTime] = useState();
-
+const useTime = () => {
   const currentTime = new Date();
+  const [getTime, setGetTime] = useState(currentTime.getSeconds());
 
-  setInterval(() => {
-    const hours = currentTime.getHours();
-    const minutes = currentTime.getMinutes();
-    const seconds = currentTime.getSeconds();
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      const hours = currentTime.getHours();
+      const minutes = currentTime.getMinutes();
+      const seconds = currentTime.getSeconds();
 
-    const times = {
-      hours: hours,
-      minutes: minutes,
-      seconds: seconds,
+      const times = {
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds,
+      };
+      setGetTime(times);
+    }, 1000);
+
+    return () => {
+      clearInterval(timeInterval);
     };
-
-    console.log(times);
-
-    setGetTime(times);
-  }, 1000);
+  }, [getTime]);
 
   return getTime;
 };
 
-export default getCurrentTime;
+export default useTime;
