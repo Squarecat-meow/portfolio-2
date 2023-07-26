@@ -47,7 +47,7 @@ const Signup = () => {
 
     const avatarPromise = (uid) => {
       return new Promise((resolve) => {
-        const storageRef = ref(storage, "users/" + uid);
+        const storageRef = ref(storage, `users/${uid}/avatar`);
         uploadString(storageRef, imageUrl, "data_url").then((snapshot) => {
           getDownloadURL(snapshot.ref).then((url) => {
             resolve(url);

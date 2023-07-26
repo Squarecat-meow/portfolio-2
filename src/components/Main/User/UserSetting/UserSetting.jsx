@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { deleteUser } from "firebase/auth";
 import { auth, database, storage } from "../../../../config/firebase";
 import { ref as dbref, remove, set } from "firebase/database";
-import { deleteObject, ref } from "firebase/storage";
+import { deleteObject, listAll, ref } from "firebase/storage";
 import UserInfo from "./UserInfo";
 
 const UserSetting = () => {
@@ -16,15 +16,15 @@ const UserSetting = () => {
   const navigate = useNavigate();
   const uid = useSelector((state) => state.login.uid);
 
-  const handleLogout = () => {
-    dispatch(upLogout());
-    navigate("/");
-  };
-
   const handleSignout = () => {
     const user = auth.currentUser;
+    dispatch(upLogout());
     remove(dbref(database, `users/${uid}`));
-    deleteObject(ref(storage, `users/${uid}`));
+    listAll(ref(storage, `users/${uid}/`)).then((res) => {
+      res.items.forEach((itemRef) => {
+        deleteObject(itemRef);
+      });
+    });
     deleteUser(user)
       .then(() => {
         navigate("/");
@@ -35,12 +35,9 @@ const UserSetting = () => {
   };
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col m-5">
       <UserInfo />
-      <div className="grid grid-flow-col gap-4">
-        <Button type="default" danger onClick={handleLogout}>
-          Log out
-        </Button>
+      <div className="my-5">
         <Popconfirm
           title="Delete account"
           description="Are you sure to delete this account?"
