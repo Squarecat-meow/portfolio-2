@@ -8,17 +8,18 @@ import MainComp from "../Main/MainComp";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
-import BackgroundImg from "../../static/img/yande.re 789141 hololive hololive_english ninomae_ina'nis ninomae_ina'nis_(artist) photoshop wallpaper.jpg";
+import BackgroundComp from "./BackgroundComp";
 
 const LoginComp = () => {
   const location = useLocation();
   return (
     <div className="flex">
-      <img
+      {/*       <img
         src={BackgroundImg}
         className="object-cover w-screen h-screen"
         alt="Background "
-      />
+      /> */}
+      <BackgroundComp />
       <div className="absolute flex items-center justify-center w-screen h-screen">
         <AnimatePresence mode="wait">
           <Routes key={location.pathname} location={location}>
