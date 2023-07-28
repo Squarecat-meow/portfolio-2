@@ -11,9 +11,12 @@ const BackgroundSlices = createSlice({
     upBackground(state, action) {
       state.background = action.payload;
     },
+    resetBackground() {
+      return initialState;
+    },
   },
 });
 
-export const { upBackground } = BackgroundSlices.actions;
+export const { upBackground, resetBackground } = BackgroundSlices.actions;
 
 export default BackgroundSlices.reducer;

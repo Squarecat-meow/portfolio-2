@@ -1,5 +1,5 @@
 import { child, get, ref } from "firebase/database";
-import React, { useState } from "react";
+import React from "react";
 import { database } from "../../config/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { upBackground } from "../../redux/slices/BackgroundSlices";

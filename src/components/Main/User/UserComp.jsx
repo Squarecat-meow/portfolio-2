@@ -3,6 +3,7 @@ import UserSetting from "./UserSetting/UserSetting";
 
 import { useDispatch, useSelector } from "react-redux";
 import { upLogout } from "../../../redux/slices/LoginSlices";
+import { resetBackground } from "../../../redux/slices/BackgroundSlices";
 
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +17,7 @@ const CascaderComp = () => {
 
   const handleLogout = () => {
     dispatch(upLogout());
+    dispatch(resetBackground());
     navigate("/");
   };
 
