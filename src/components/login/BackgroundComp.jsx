@@ -1,5 +1,5 @@
-import { child, get, ref } from "firebase/database";
-import React from "react";
+import React, { useEffect } from "react";
+import { onValue, ref } from "firebase/database";
 import { database } from "../../config/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { upBackground } from "../../redux/slices/BackgroundSlices";
@@ -8,12 +8,13 @@ const BackgroundComp = () => {
   const dispatch = useDispatch();
   const uid = useSelector((state) => state.login.uid);
   const bgUrl = useSelector((state) => state.background.background);
-  const dbRef = ref(database);
+  const dbRef = ref(database, `users/${uid}`);
 
-  get(child(dbRef, `users/${uid}`)).then((snapshot) => {
-    if (snapshot.val().background) {
-      dispatch(upBackground(snapshot.val().background));
-    }
+  useEffect(() => {
+    onValue(dbRef, (snapshot) => {
+      const imgUrl = snapshot.val().background;
+      dispatch(upBackground(imgUrl));
+    });
   });
 
   return (
