@@ -20,7 +20,9 @@ const SettingModal = ({ setShowModal }) => {
       <div className="flex flex-row-reverse">
         <CloseOutlined onClick={handleClose} className="m-3" />
       </div>
-      <EnvSetting />
+      <div className="mx-5">
+        <EnvSetting />
+      </div>
     </motion.div>
   );
 };

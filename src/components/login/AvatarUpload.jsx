@@ -13,7 +13,7 @@ const AvatarUpload = () => {
   const beforeUpload = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    return new Promise((resolve) => {
+    return new Promise(() => {
       reader.onload = () => {
         dispatch(imgUrl(reader.result));
       };

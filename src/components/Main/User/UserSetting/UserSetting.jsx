@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import { deleteUser } from "firebase/auth";
 import { auth, database, storage } from "../../../../config/firebase";
-import { ref as dbref, remove, set } from "firebase/database";
+import { ref as dbref, remove } from "firebase/database";
 import { deleteObject, listAll, ref } from "firebase/storage";
 import UserInfo from "./UserInfo";
 

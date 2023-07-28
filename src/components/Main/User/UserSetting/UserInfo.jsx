@@ -9,7 +9,11 @@ const UserInfo = () => {
   return (
     <div className="">
       <h3>{username}</h3>
-      <img className="w-[100px] rounded-full" src={avatarUrl} />
+      <img
+        className="w-[100px] rounded-full"
+        src={avatarUrl}
+        alt="user avatar"
+      />
     </div>
   );
 };
