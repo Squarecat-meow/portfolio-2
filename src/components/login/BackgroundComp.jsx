@@ -23,7 +23,7 @@ const BackgroundComp = () => {
         <img
           src={bgUrl}
           alt="background"
-          className="object-cover object-top w-screen h-screen"
+          className="object-cover object-center w-screen h-screen"
         />
       ) : (
         <div className="absolute w-screen h-screen bg-gradient-to-r to-pink-300 via-sky-300 from-neutral-50" />

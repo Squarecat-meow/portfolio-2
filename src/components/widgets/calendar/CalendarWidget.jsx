@@ -7,7 +7,7 @@ const CalendarWidget = () => {
   };
   return (
     <div className="flex flex-col items-center row-span-2 p-5 align-middle shadow-2xl backdrop-blur-md rounded-2xl bg-slate-300/50">
-      <Calendar onPanelChange={onPanelChange} />
+      <Calendar fullscreen={false} onPanelChange={onPanelChange} />
     </div>
   );
 };
