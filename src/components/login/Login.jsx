@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Input, Form, Checkbox, Button } from "antd";
+import { Input, Form, Checkbox, Button, Alert } from "antd";
 import { motion } from "framer-motion";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -14,7 +14,7 @@ import { get, ref } from "firebase/database";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [dbUser, setDbUser] = useState();
+  const [errorCode, setErrorCode] = useState("");
 
   const handleSubmit = (e) => {
     const userEmail = e.userEmail;
@@ -39,9 +39,18 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error.code);
-        console.log(error.message);
+        setErrorCode(error.code);
       });
   };
+
+  let errorMessage;
+  if (errorCode === "auth/wrong-password") {
+    errorMessage = "Wrong Password!";
+  } else if (errorCode === "auth/user-not-found") {
+    errorMessage = "User Not Found!";
+  } else if (errorCode === "auth/invalid-email") {
+    errorMessage = "Invalid Email!";
+  }
 
   return (
     <motion.div
@@ -50,6 +59,7 @@ const Login = () => {
       exit={{ x: -50, opacity: 0 }}
       className="w-[400px] h-[400px] my-auto bg-stone-200/50 backdrop-blur-md rounded-xl shadow-2xl flex flex-col"
     >
+      {errorCode && <Alert message={errorMessage} type="error" />}
       <h1 className="my-10 text-3xl font-extrabold text-center">Log in</h1>
       <Form initialValues={{ remember: true }} onFinish={handleSubmit}>
         <Form.Item
