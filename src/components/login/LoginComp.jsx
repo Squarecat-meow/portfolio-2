@@ -20,7 +20,7 @@ const LoginComp = () => {
         alt="Background "
       /> */}
       <BackgroundComp />
-      <div className="absolute flex items-center justify-center w-screen h-screen">
+      <div className="absolute flex items-center w-screen h-screen justify-self-center">
         <AnimatePresence mode="wait">
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Login />} />
