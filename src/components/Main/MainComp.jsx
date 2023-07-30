@@ -13,7 +13,7 @@ const MainComp = () => {
     <motion.div
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="grid grid-flow-col grid-cols-3 grid-rows-2 gap-3 m-5"
+      className="grid grid-flow-col grid-cols-3 grid-rows-2 gap-5 m-24 h-fit"
     >
       <AnalogClock />
       <SearchComp />

@@ -5,7 +5,7 @@ const AnalogClock = () => {
   const times = useTime();
 
   return (
-    <div className="flex items-center justify-center p-5 shadow-2xl backdrop-blur-md rounded-2xl bg-slate-300/50">
+    <div className="flex items-center justify-center p-5 shadow-2xl min-h-96 backdrop-blur-md rounded-2xl bg-slate-300/50">
       <div className="flex items-center justify-center w-1/2 rounded-full aspect-square bg-slate-50">
         <div
           id="second-hand"

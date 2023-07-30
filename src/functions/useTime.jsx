@@ -21,7 +21,7 @@ const useTime = () => {
     return () => {
       clearInterval(timeInterval);
     };
-  }, [getTime]);
+  });
 
   return getTime;
 };

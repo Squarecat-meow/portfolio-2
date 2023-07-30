@@ -44,7 +44,7 @@ const SearchComp = () => {
     </Select>
   );
   return (
-    <div className="flex flex-col items-center p-5 align-middle border-2 shadow-2xl backdrop-blur-md rounded-2xl bg-slate-300/50">
+    <div className="flex flex-col items-center justify-center align-middle shadow-2xl max-h-96 backdrop-blur-md rounded-2xl bg-slate-300/50">
       <Greeting />
       <Search
         ref={searchTextValue}
