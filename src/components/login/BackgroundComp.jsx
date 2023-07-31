@@ -18,7 +18,7 @@ const BackgroundComp = () => {
   });
 
   return (
-    <div className="flex">
+    <div className="absolute flex">
       {bgUrl ? (
         <img
           src={bgUrl}

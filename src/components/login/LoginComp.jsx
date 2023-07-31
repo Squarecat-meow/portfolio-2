@@ -13,9 +13,9 @@ import BackgroundComp from "./BackgroundComp";
 const LoginComp = () => {
   const location = useLocation();
   return (
-    <div className="flex">
+    <div>
       <BackgroundComp />
-      <div className="absolute items-center w-screen h-screen">
+      <div className="flex items-center justify-center w-screen h-screen">
         <AnimatePresence mode="wait">
           <Routes key={location.pathname} location={location}>
             <Route path="/" element={<Login />} />
