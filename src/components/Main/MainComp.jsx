@@ -7,6 +7,7 @@ import SearchComp from "./SearchComp";
 import AnalogClock from "../widgets/clock/AnalogClock";
 import UserComp from "./User/UserComp";
 import CalendarWidget from "../widgets/calendar/CalendarWidget";
+import MisskeyWidget from "../widgets/misskey/MisskeyWidget";
 
 const MainComp = () => {
   return (
@@ -15,9 +16,10 @@ const MainComp = () => {
       animate={{ y: 0, opacity: 1 }}
       className="grid grid-flow-col grid-cols-3 grid-rows-2 gap-5 m-24"
     >
+      <CalendarWidget />
       <AnalogClock />
       <SearchComp />
-      <CalendarWidget />
+      <MisskeyWidget />
       <UserComp />
       <Setting />
     </motion.div>
