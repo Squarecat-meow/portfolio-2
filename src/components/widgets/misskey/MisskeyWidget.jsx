@@ -1,15 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
-import { v4 as uuid } from "uuid";
-
-import { api as misskeyApi } from "misskey-js";
+import React, { useEffect, useState } from "react";
 
 const MisskeyWidget = () => {
-  const [dataSent, setDataSent] = useState(false);
   const [receivedData, setReceivedData] = useState([]);
   const webSocketUrl =
     "wss://k.lapy.link/streaming?i=Wrpny1kTXaLg3ro6Dwt49pO1nyTtecy6";
   const ws = new WebSocket(webSocketUrl);
-  const id = uuid();
 
   useEffect(() => {
     ws.onopen = () => {
@@ -23,7 +18,6 @@ const MisskeyWidget = () => {
           },
         })
       );
-      setDataSent(true);
     };
     ws.onclose = () => {
       console.log("Disconnected to " + webSocketUrl);
@@ -46,27 +40,63 @@ const MisskeyWidget = () => {
   const processingJSON = (data) => {
     const text = data.body.body.text;
     const avatarUrl = data.body.body.user.avatarUrl;
+    let renote = [];
+    let file = [];
+    if (data.body.body.fileIds) {
+      const fileLength = data.body.body.files.length;
+      for (let i = 0; i < fileLength; i++) {
+        file.push(data.body.body.files[i].url);
+      }
+    }
+
+    if (data.body.body.renote) {
+      renote.push({
+        renoteText: data.body.body.renote.text,
+        renoteUser: data.body.body.renote.user,
+      });
+    }
 
     const postData = {
       text: text,
       avatarUrl: avatarUrl,
+      file: file,
+      renote: renote,
     };
 
     return postData;
   };
 
+  console.log(receivedData);
+
   return (
-    <div className="flex flex-col items-center row-span-2 p-5 overflow-y-auto shadow-2xl h-[576px] backdrop-blur-md rounded-2xl bg-slate-300/50">
+    <div className="flex flex-col row-span-2 p-5 overflow-y-auto shadow-2xl h-[576px] backdrop-blur-md rounded-2xl bg-slate-300/50">
       <h1 className="absolute top-3">MisskeyWidget</h1>
-      <div className="flex flex-col-reverse">
+      <div className="flex flex-col-reverse mt-8">
         {receivedData.map((item, i) => (
-          <div className="flex items-center grid-cols-2 my-2">
+          <div key={i} className="flex items-center grid-cols-2 my-2">
             <div>
               <img src={item.avatarUrl} className="w-12 rounded-full" />
             </div>
             <div className="ml-2">
-              <span key={i}>{item.text}</span>
+              <span key={i} className="break-all">
+                {item.text}
+              </span>
+              {item.renote.length !== 0 && (
+                <span>RE: {item.renote[0].renoteText}</span>
+              )}
             </div>
+            {item.file.length === 0 ? null : (
+              <div>
+                {item.file.map((image, i) => (
+                  <img
+                    src={image}
+                    className="object-cover w-48 h-32"
+                    alt="user uploaded"
+                    key={i}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
