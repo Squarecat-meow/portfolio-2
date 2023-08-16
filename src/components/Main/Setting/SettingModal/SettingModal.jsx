@@ -5,8 +5,23 @@ import { CloseOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion";
 
 import EnvSetting from "./EnvSetting";
+import { Tabs } from "antd";
+import MisskeySetting from "./MisskeySetting";
 
 const SettingModal = ({ setShowModal }) => {
+  const tabItems = [
+    {
+      key: 1,
+      label: "Background",
+      children: <EnvSetting />,
+    },
+    {
+      key: 2,
+      label: "Misskey",
+      children: <MisskeySetting />,
+    },
+  ];
+
   const handleClose = () => {
     setShowModal(false);
   };
@@ -20,8 +35,8 @@ const SettingModal = ({ setShowModal }) => {
       <div className="flex flex-row-reverse">
         <CloseOutlined onClick={handleClose} className="m-3" />
       </div>
-      <div className="mx-5">
-        <EnvSetting />
+      <div>
+        <Tabs tabPosition="left" items={tabItems} />
       </div>
     </motion.div>
   );

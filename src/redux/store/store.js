@@ -15,6 +15,7 @@ import {
 import LoginSlices from "../slices/LoginSlices";
 import SignupSlices from "../slices/SignupSlices";
 import BackgroundSlices from "../slices/BackgroundSlices";
+import MisskeySlices from "../slices/MisskeySlices";
 
 const persistConfig = {
   key: "root",
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   login: LoginSlices,
   signup: SignupSlices,
   background: BackgroundSlices,
+  misskey: MisskeySlices,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

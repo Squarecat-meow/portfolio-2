@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const MisskeyWidget = () => {
   const [receivedData, setReceivedData] = useState([]);
-  const webSocketUrl =
-    "wss://k.lapy.link/streaming?i=Wrpny1kTXaLg3ro6Dwt49pO1nyTtecy6";
+  const token = useSelector((state) => state.misskey.token);
+  const server = useSelector((state) => state.misskey.server);
+  const webSocketUrl = `wss://${server}/streaming?i=${token}`;
   const ws = new WebSocket(webSocketUrl);
 
   useEffect(() => {
